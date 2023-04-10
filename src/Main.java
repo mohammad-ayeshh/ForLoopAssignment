@@ -1,5 +1,11 @@
+import java.util.Objects;
+
 public class Main {
     public static void main(String[] args) {
+
+        System.out.println("Sum of even numbers from 0 to 100 is: " + sumNumbers("even", 100));
+        System.out.println("Sum of odd numbers from 0 to 100 is: " + sumNumbers("odd", 100));
+        System.out.println("Sum of odd numbers from 0 to 100 is: " + sumNumbers("divisor", 100 ,7));
 
 
         sumOfEvenFor(0,100);
@@ -11,30 +17,63 @@ public class Main {
         sumOfDivisibleFor(0,100,7);
         sumOfDivisibleWhile(0,100,7);
         sumOfDivisibleDoWhile(0,100,7);
-        System.out.println("Sum of even numbers from 0 to 100 is: " + sumNumbers(true, 100));
-        System.out.println("Sum of odd numbers from 0 to 100 is: " + sumNumbers(false, 100));
 
     }
-    public static int sumNumbers(boolean even, int end) {
+
+
+    public static int sumNumbers(String sumType, int end) {
         int sum = 0;
-        switch(even ? 1 : !even ? 2 : 3) {
-            case 1:
-                for (int i = 0; i <= end; i+=2) {
+        int switchCase= 0;
+        if (Objects.equals(sumType, "even")){
+            switchCase=1;
+        } else if (Objects.equals(sumType, "odd")) {
+            switchCase=2;
+        }
+
+        switch (switchCase) {
+            case 1 -> {
+                for (int i = 0; i <= end; i += 2) {
                     sum += i;
                 }
-                break;
-            case 2:
-                for (int i = 1; i <= end; i+=2) {
+            }
+            case 2 -> {
+                for (int i = 1; i <= end; i += 2) {
                     sum += i;
                 }
-                break;
-            case 3:
+            }
+            default -> System.out.println("invalid sumType please try (odd,even)");
+        }
+        return sum;
+    }
+    public static int sumNumbers(String sumType, int end ,int divisor) {
+        int sum = 0;
+        int switchCase= 0;
+        if (Objects.equals(sumType, "even")){
+            switchCase=1;
+        } else if (Objects.equals(sumType, "odd")) {
+            switchCase=2;
+        } else if (Objects.equals(sumType, "divisor")) {
+            switchCase=3;
+        }
+        switch (switchCase ) {
+            case 1 -> {
+                for (int i = 0; i <= end; i += 2) {
+                    sum += i;
+                }
+            }
+            case 2 -> {
+                for (int i = 1; i <= end; i += 2) {
+                    sum += i;
+                }
+            }
+            case 3 -> {
                 for (int i = 0; i <= end; i++) {
-                    if (i % 7 == 0) {
+                    if (i % divisor == 0) {
                         sum += i;
                     }
                 }
-                break;
+            }
+            default -> System.out.println("invalid sumType please try (odd,even,divisor)");
         }
         return sum;
     }
